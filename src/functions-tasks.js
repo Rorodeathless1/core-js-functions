@@ -89,7 +89,7 @@ function getPowerFunction(exponent) {
  *   getPolynom()      => null
  */
 function getPolynom(...coefficients) {
-  return function (x) {
+  return (x) => {
     let result = 0;
     for (let i = 0; i < coefficients.length; i += 1) {
       const coefficient = coefficients[i];
@@ -139,7 +139,7 @@ function memoize(func) {
  * retryer() => 2
  */
 function retry(func, attempts) {
-  return function (...args) {
+  return (...args) => {
     let lastError;
 
     for (let i = 0; i < attempts; i += 1) {
@@ -178,7 +178,7 @@ function retry(func, attempts) {
  *
  */
 function logger(func, logFunc) {
-  return function (...args) {
+  return (...args) => {
     const argsString = args.map((arg) => JSON.stringify(arg)).join(',');
     const funcName = func.name || 'anonymous';
 
@@ -205,7 +205,7 @@ function logger(func, logFunc) {
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
 function partialUsingArguments(fn, ...args) {
-  return function (...nextArgs) {
+  return (...nextArgs) => {
     return fn.apply(this, args.concat(nextArgs));
   };
 }
@@ -229,7 +229,7 @@ function partialUsingArguments(fn, ...args) {
  */
 function getIdGeneratorFunction(startFrom) {
   let currentId = startFrom - 1;
-  return function () {
+  return () => {
     currentId += 1;
     return currentId;
   };
